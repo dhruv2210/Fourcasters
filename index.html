@@ -42,6 +42,8 @@
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
     <script src="form.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script type="module" src="/index.js"></script>
   </head>
 
   <body>
@@ -130,14 +132,21 @@
             <div class="features">
               <li id="feelsLike">Feels Like 0°C</li>
               <li id="humidity">Humidity 0</li>
-              <li id="longitude">Longitude 0</li>
               <li id="latitude">Latitude 0</li>
+              <li id="longitude">Longitude 0</li>
             </div>
           </ul>
           <div class="h1"></div>
         </div>
         <script src="index.js"></script>
       </div>
+
+      <!--The div element for the map -->
+      <div id="map"></div>
+      <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBDMg_0IJ6TyCJY7U-SrXkkUAUoDE7wCGk&callback=initMap&v=weekly"
+        defer
+      ></script>
     </section>
 
     <main id="main">
@@ -455,7 +464,6 @@
                   <div class="col-md-6">
                     <input
                       type="text"
-                      
                       id="name"
                       class="form-control"
                       placeholder="Your Name"
@@ -467,7 +475,6 @@
                     <input
                       type="email"
                       class="form-control"
-                      
                       id="email"
                       placeholder="Your Email"
                       required
@@ -478,7 +485,6 @@
                     <input
                       type="text"
                       class="form-control"
-                      
                       id="subject"
                       placeholder="Subject"
                       required
@@ -488,7 +494,6 @@
                   <div class="col-md-12">
                     <textarea
                       class="form-control"
-                      
                       id="message"
                       rows="6"
                       placeholder="Message"
@@ -563,13 +568,13 @@
         message;
 
       Email.send({
-        Host : "smtp.elasticemail.com",
-        Username : "21ituod007@ddu.ac.in",
-        Password : "755BDAD30C788466EBABB867D9C101AC1D9F",
+        Host: "smtp.elasticemail.com",
+        Username: "21ituod007@ddu.ac.in",
+        Password: "755BDAD30C788466EBABB867D9C101AC1D9F",
         To: "21ituod007@ddu.ac.in",
-        From : email,
-        Subject : subject,
-        Body : body,
+        From: email,
+        Subject: subject,
+        Body: body,
       }).then((message) => alert(message));
     });
   </script>

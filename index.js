@@ -10,6 +10,9 @@ let humidity = document.querySelector("#humidity");
 let longitude = document.querySelector("#longitude");
 let latitude = document.querySelector("#latitude");
 
+let latmap;
+let lonmap;
+
 check.addEventListener("click", () => {
     let key = `bd4ea33ecf905116d12af172e008dbae`;
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&units=metric&appid=${key}`;
@@ -45,56 +48,30 @@ check.addEventListener("click", () => {
         
         humidity.innerText = `Humidity ${data.main.humidity}`;
         latitude.innerText = `Latitude ${data.coord.lat}`;
-        longitude.innerText = `Latitude ${data.coord.lon}`;
-        
+        longitude.innerText = `Longitude ${data.coord.lon}`;
+
+        latmap = `${data.coord.lat}`;
+        lonmap = `${data.coord.lon}`;
     })
     //country.value = "";
     city.value = "";
 })
 
+// Initialize and add the map
 function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 8,
-      center: { lat: 40.731, lng: -73.997 },
-    });
-    const geocoder = new google.maps.Geocoder();
-    const infowindow = new google.maps.InfoWindow();
+  latitude.innerText = `Latitude ${data.coord.lat}`;
+  longitude.innerText = `Longitude ${data.coord.lon}`;  
+  const uluru = { lat: latitude.innerText , lng: longitude.innerHTML};
   
-    document.getElementById("submit").addEventListener("click", () => {
-      geocodeLatLng(geocoder, map, infowindow);
-    });
-  }
-  
-  function geocodeLatLng(geocoder, map, infowindow) {
-    const input = document.getElementById("latlng").value;
-    const latlngStr = input.split(",", 2);
-    const latlng = {
-      lat: parseFloat(latlngStr[0]),
-      lng: parseFloat(latlngStr[1]),
-    };
-  
-    geocoder
-      .geocode({ location: latlng })
-      .then((response) => {
-        if (response.results[0]) {
-          map.setZoom(11);
-  
-          const marker = new google.maps.Marker({
-            position: latlng,
-            map: map,
-          });
-  
-          infowindow.setContent(response.results[0].formatted_address);
-          infowindow.open(map, marker);
-        } else {
-          window.alert("No results found");
-        }
-      })
-      .catch((e) => window.alert("Geocoder failed due to: " + e));
-  }
-  
-  window.initMap = initMap;
+  const map = new google.maps.Map(document.getElementById("map"), {
+    zoom: 4,
+    center: uluru,
+  });
+  // The marker, positioned at Uluru
+  const marker = new google.maps.Marker({
+    position: uluru,
+    map: map,
+  });
+}
 
-
-
-  
+window.initMap = initMap;
