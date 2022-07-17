@@ -10,9 +10,6 @@ let humidity = document.querySelector("#humidity");
 let longitude = document.querySelector("#longitude");
 let latitude = document.querySelector("#latitude");
 
-let latmap;
-let lonmap;
-
 check.addEventListener("click", () => {
     let key = `bd4ea33ecf905116d12af172e008dbae`;
     let url = `https://api.openweathermap.org/data/2.5/weather?q=${city.value}&lang=en&units=metric&appid=${key}`;
@@ -44,24 +41,28 @@ check.addEventListener("click", () => {
             }
         })
 
-        feelsLike.innerText = `Feels Like ${data.main.feels_like}°C`;
+        feelsLike.innerText = `Feels Like: ${data.main.feels_like}°C`;
         
-        humidity.innerText = `Humidity ${data.main.humidity}`;
-        latitude.innerText = `Latitude ${data.coord.lat}`;
-        longitude.innerText = `Longitude ${data.coord.lon}`;
+        humidity.innerText = `Humidity: ${data.main.humidity}`;
+        latitude.innerText = `Latitude: ${data.coord.lat}`;
+        longitude.innerText = `Longitude: ${data.coord.lon}`;
 
-        latmap = `${data.coord.lat}`;
-        lonmap = `${data.coord.lon}`;
+        // latmap = `${data.coord.lat}`;
+        // lonmap = `${data.coord.lon}`;
+
+        // var location = new google.maps.LatLng(`${data.main.humidity}`,`${data.coord.lon}`);
+
     })
     //country.value = "";
-    city.value = "";
+    // city.value = "";
+
 })
 
 // Initialize and add the map
 function initMap() {
-  latitude.innerText = `Latitude ${data.coord.lat}`;
-  longitude.innerText = `Longitude ${data.coord.lon}`;  
-  const uluru = { lat: latitude.innerText , lng: longitude.innerHTML};
+  // latitude.innerText = `Latitude ${data.coord.lat}`;
+  // longitude.innerText = `Longitude ${data.coord.lon}`;  
+  const uluru = { lat: 22.7 , lng: 72.8667 };
   
   const map = new google.maps.Map(document.getElementById("map"), {
     zoom: 4,
@@ -74,4 +75,35 @@ function initMap() {
   });
 }
 
-window.initMap = initMap;
+// var map;
+// var service;
+// var infowindow;
+
+// function initMap() {
+//   var pyrmont = new google.maps.LatLng(22.7,72.8667);
+
+//   map = new google.maps.Map(document.getElementById('map'), {
+//       center: pyrmont,
+//       zoom: 15
+//     });
+
+//   var request = {
+//     location: pyrmont,
+//     radius: '700',
+//     query: 'pizza'
+//   };
+
+//   service = new google.maps.places.PlacesService(map);
+//   service.textSearch(request, callback);
+// }
+
+// function callback(results, status) {
+//   if (status == google.maps.places.PlacesServiceStatus.OK) {
+//     for (var i = 0; i < results.length; i++) {
+//       var place = results[i];
+//       createMarker(results[i]);
+//     }
+//   }
+// }
+
+// window.initMap = initMap;
